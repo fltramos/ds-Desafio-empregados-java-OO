@@ -1,0 +1,27 @@
+package entities;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Department {
+	
+	private String name;
+	private Integer payDay;
+	
+	private Adress adress;
+	private List<Employee> employees = new ArrayList<>();
+	
+	public Department() {		
+	}
+
+	public Department(String name, Integer payDay, Adress adress, List<Employee> employees) {
+		this.name = name;
+		this.payDay = payDay;
+		this.adress = adress;
+		this.employees = employees;
+	}
+	
+	
+	
+
+}

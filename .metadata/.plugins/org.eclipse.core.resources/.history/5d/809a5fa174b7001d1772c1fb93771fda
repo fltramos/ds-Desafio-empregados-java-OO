@@ -1,0 +1,69 @@
+package application;
+
+import java.util.Locale;
+import java.util.Scanner;
+
+import entities.Adress;
+import entities.Department;
+import entities.Employee;
+
+public class Program {
+
+	public static void main(String[] args) {
+		
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);		
+		
+		System.out.print("Nome do departamento: ");
+		//sc.next();
+		String nome = sc.next();
+		System.out.print("Dia do pagamento: ");
+		int diaPagamento = sc.nextInt();		
+		System.out.print("Email: ");
+		String email = sc.next();
+		System.out.print("Telefone: ");
+		String telefone = sc.next();
+		
+		Adress adress = new Adress(email, telefone);
+		
+		Department department = new Department(nome, diaPagamento, adress);
+		System.out.println(department.getName());
+		System.out.println(department.getPayDay());
+		
+		System.out.print("Quantos funcionários tem o departamento? ");
+		int n = sc.nextInt();
+		
+		for(int i = 1; i <= n; i++) {
+			
+			System.out.println("Dados do funcionário " + i + ":");
+			System.out.print("Nome: ");
+			//sc.next();
+			String nomeFuncionario = sc.next();
+			System.out.print("Salário: ");
+			double salario = sc.nextDouble();
+			
+			Employee employee = new Employee (nomeFuncionario, salario);
+			
+			department.addEmployee(employee);
+		}		
+		
+		showReport(department);		
+		
+		sc.close();
+		
+	}
+	
+	public static void showReport(Department department) {
+		
+		System.out.println("FOLHA DE PAGAMENTO:");
+		System.out.printf("Departamento %s = R$ %.2f\n", department.getName(), department.payroll());
+		System.out.println("Pagamento realizado no dia " + department.getPayDay());		
+		System.out.println("Funcionários:");
+		for(Employee e : department.getEmployees()) {
+			System.out.println(e.getName());
+		}
+		
+		System.out.println("Para dúvidas favor entrar em contato: " + department.getAdress().getEmail());
+	}
+
+}
